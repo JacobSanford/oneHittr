@@ -4,9 +4,6 @@ $languageCode='EN';
 initHittr();
 
 switch (getTriageValue()) {
-	case 'NEW_REQUEST':
-		print generateUploadPage();
-	break;
 
 	case 'UPLOAD_REQUEST':
 		$hashToUse=getUnusedHash();
@@ -22,9 +19,11 @@ switch (getTriageValue()) {
 			header('Content-type: '.trim($fileInfoArray[1]));
 			readfile($fileToSend[0]);
 			unlink($fileToSend[0]);
+			break;
 		}
+
+	default:
 		print generateUploadPage();
-	break;
 }
 
 
@@ -48,7 +47,7 @@ function getTriageValue() {
 	} elseif (isset($_GET['h'])) {
 		return 'RETRIEVAL_REQUEST';
 	}
-	return 'NEW_REQUEST';
+	return;
 }
 
 
