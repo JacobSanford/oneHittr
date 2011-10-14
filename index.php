@@ -60,7 +60,7 @@ function generateUploadPage(){
 function generateUploadForm(){
 	$filenameString=getLanguageString('FILENAME');
 	$submitString=getLanguageString('SUBMIT');
-	$maxFileSizeString=getLanguageString('MAX_FILESIZE_WARNING')." ".getMaxFileUploadSize();
+	$maxFileSizeString=getLanguageString('MAX_FILESIZE_WARNING').' '.getMaxFileUploadSize().'M';
 
 	$formHtml=<<<EOT
 <form action="{$_SERVER['PHP_SELF']}" method="post" enctype="multipart/form-data">
@@ -130,7 +130,7 @@ EOT;
 
 
 function getMaxFileUploadSize() {
-	return min(ini_get('upload_max_filesize'), ini_get('post_max_size'), ini_get('memory_limit'));
+	return min((int) ini_get('upload_max_filesize'),(int) ini_get('post_max_size'),(int) ini_get('memory_limit'));
 }
 
 
